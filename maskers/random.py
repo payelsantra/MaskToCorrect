@@ -6,7 +6,7 @@ import pickle
 from tqdm import tqdm
 from transformers import AutoTokenizer
 class Masker:
-    def mask(self, data):
+    def mask(self, data, args):
         sample_prob=0.15
         tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
         for idx in tqdm(list(data.keys())):

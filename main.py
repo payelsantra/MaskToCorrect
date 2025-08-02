@@ -49,7 +49,7 @@ if __name__ == "__main__":
 		    for i in range(len(input_claims)):  
 		    	data[i]=input_claims[i]
 		    	data[i]["evidence"]=input_evidence[i][0:args.shots]
-		    masked_output = masker.mask(data)
+		    masked_output = masker.mask(data, args)
 		    output_ret="ensemble_"+ef
 		    with open(output_ret,"wb") as ret_file:
 		    	pickle.dump(masked_output,ret_file)
@@ -62,7 +62,7 @@ if __name__ == "__main__":
     	for i in range(len(input_claims)):
     		data[i]=input_claims[i]
     		data[i]["evidence"]=input_evidence[i][0:args.shots]
-    	masked_output = masker.mask(data)
+    	masked_output = masker.mask(data,args)
     	with open(args.output_file,"wb") as ret_file:
     	    	pickle.dump(masked_output,ret_file)
     print("Masking completed.")

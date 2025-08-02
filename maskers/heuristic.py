@@ -24,7 +24,7 @@ def common_tokens(tokens1, tokens2):
     input_mask = [i for i, keep in enumerate(mask_flags) if not keep]
     return masked, input_mask
 class Masker:
-    def mask(self, data,shots):
+    def mask(self, data,args):
         tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
         for idx in tqdm((data.keys())):
             input_claim = data[idx]["input_claim"]
