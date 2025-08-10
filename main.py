@@ -66,7 +66,10 @@ if __name__ == "__main__":
     		data[i]=input_claims[i]
     		data[i]["evidence"]=input_evidence[i][0:args.shots]
     	masked_output = masker.mask(data,args)
+    	corrector_module=importlib.import_module("corrector.corrected_candidates")
+    	corrector=corrector_module.Corrector()
+    	corrected_candidates=corrector.correct(masked_output, args)
     	with open(args.output_file,"wb") as ret_file:
-    	    	pickle.dump(masked_output,ret_file)
+    	    	pickle.dump(corrected_candidates,ret_file)
     print("Masking completed.")
  
