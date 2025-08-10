@@ -9,6 +9,7 @@ def prompt_generator(data, args):
         Input: 
         Claim: [sentence]"""
         if args.dataset=="scifact":
+            
             instruction="""Your task is to correct a claim by filling in the [MASK] using the provided input evidence, ensuring that the corrected claim is supported by the evidence and only differs from the input claim in the masked positions. If the input claim is correct, do not edit it and give the input claim as output. Your output claim should be faithful to the provided evidence and should not deviate much from the input claim.
 
 Please use the most relevant evidence to correct the claim. The corrected claim shouldn't contain any [MASK].

@@ -2,11 +2,22 @@ import argparse
 import sys
 import importlib
 import json, pickle
+import subprocess
 
-
-
-    
-
+def run_in_other_env(output_file, retriever, shots):
+    script="correction_scoring.py"
+    env_name="scorer"
+    cmd = [
+        "conda", "run", "-n", env_name,
+        "python", script,
+        output_file,
+        retriever,
+        str(shots)
+    ]
+    result = subprocess.run(cmd)
+    if result.returncode != 0:
+        print(f"Error running {script} in env {env_name}")
+        sys.exit(result.returncode)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="M2C")
@@ -39,7 +50,6 @@ if __name__ == "__main__":
         sys.exit(1)
 	
     data = {}
-
     
     if args.model=="ensemble":
 	    evidence_file=["bm25.pkl","monot.pkl","rm3.pkl","colbert.pkl","contriver.pkl"]
@@ -56,6 +66,8 @@ if __name__ == "__main__":
 		    output_ret="ensemble_"+ef
 		    with open(output_ret,"wb") as ret_file:
 		    	pickle.dump(corrected_candidates,ret_file)
+		    run_in_other_env(output_ret)
+
 		    
 		    
     else:
