@@ -10,9 +10,7 @@ def run_in_other_env(output_file, retriever, shots):
     cmd = [
         "conda", "run", "-n", env_name,
         "python", script,
-        output_file,
-        retriever,
-        str(shots)
+        output_file
     ]
     result = subprocess.run(cmd)
     if result.returncode != 0:
