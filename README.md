@@ -20,7 +20,7 @@ conda activate masktocorrect_env
 pip install -r requirements_main.txt
 
 # Create and activate the scorer environment
-conda create --name scorer python=3.8
+conda create --name scorer python=3.9
 conda activate scorer
 
 # Install the scorer dependencies
