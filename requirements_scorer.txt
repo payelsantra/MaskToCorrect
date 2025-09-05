@@ -1,0 +1,5 @@
+torch==2.2.1
+transformers==4.19.2 
+nltk 
+py-rouge 
+evaluate
