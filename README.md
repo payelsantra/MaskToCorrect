@@ -25,7 +25,7 @@ conda activate scorer
 
 # Install the scorer dependencies
 pip install -r requirements_scorer.txt
-
+conda deactivate 
 ```
 ## Running the Main Script
 
