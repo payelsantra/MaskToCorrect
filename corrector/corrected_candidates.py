@@ -37,7 +37,7 @@ Claim: [sentence]"""
 
     Input: 
     Claim: [sentence]"""
-    if args.dataset=="scifact"
+    if args.dataset=="scifact":
         instuction_zero="""Your task is to correct a claim by filling in the [MASK] using the provided input evidence, ensuring that the corrected claim is supported by the evidence and only differs from the input claim in the masked positions. If the input claim is correct, do not edit it and give the input claim as output. Your output claim should be faithful to related evidence and should not deviate much from the input claim.
 
 Please use the most relevant evidence to correct the claim. The corrected claim shouldn't contain any [MASK].
@@ -61,6 +61,8 @@ Claim: [sentence]"""
             e=data[key]['evidence']
             use_zeroshot=1
         claim=data[key]['input_claim']
+        prompt_dict={}
+        o_id={}
         for masked_claim in data[key]["masked_claim"]:
             #print(i) 
             if use_zeroshot==0:
@@ -75,8 +77,7 @@ Claim: [sentence]"""
             o_id[j]=key
             j=j+1
 
-    prompt_list=list(prompt_dict.values())
-    return prompt_list
+    return prompt_dict,o_id
 class Corrector:
     def correct(self, data, args):
         if args.model=="llama":
@@ -85,8 +86,9 @@ class Corrector:
             model_chosen="Qwen/Qwen2.5-32B-Instruct-AWQ"
         
         llm = LLM(model=model_chosen)
-        prompt_list=prompt_generator(data, args)
-        
+        prompt_dict,o_id=prompt_generator(data, args)
+        prompt_list=list(prompt_dict.values())
+
         if args.model=="llama": 
             sampling_params = SamplingParams(temperature=0.05, top_p=0.5, min_tokens=10, max_tokens=100, stop=["}"], include_stop_str_in_output=True)
         elif args.model=="qwen":
@@ -119,4 +121,5 @@ class Corrector:
         return data
         
             
+
 

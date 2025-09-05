@@ -34,7 +34,9 @@ if __name__ == "__main__":
     parser.add_argument("--masker", type=str, required=True,
                         choices=["heuristic", "random", "diversity", "entity"],
                         help="Masking strategy to apply")
-
+    parser.add_argument("--dataset", type=str, required=True,
+                        choices=["fever", "scifact"],
+                        help="Dataset used")
     args = parser.parse_args()
     print(f"Using masker: {args.masker}")
    
@@ -83,3 +85,4 @@ if __name__ == "__main__":
     	    	pickle.dump(corrected_candidates,ret_file)
     print("Masking completed.")
  
+
