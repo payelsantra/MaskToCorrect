@@ -1,7 +1,7 @@
 # MaskToCorrect
 ## Installation
 
-1. **Clone the repository**  
+**Clone the repository**  
    ```bash
    git clone https://github.com/payelsantra/MaskToCorrect.git
    cd MaskToCorrect
@@ -16,4 +16,8 @@ conda create --name masktocorrect_env python=3.9
 
 # Activate the environment
 conda activate masktocorrect_env
+
+# Install the main dependencies
+pip install -r requirements_main.txt
+
 
