@@ -18,6 +18,8 @@ conda activate masktocorrect_env
 
 # Install the main dependencies
 pip install -r requirements_main.txt
+#For entity masking, install spacy library
+python -m spacy download en_core_web_sm
 
 # Create and activate the scorer environment
 conda create --name scorer python=3.9
