@@ -1,4 +1,10 @@
 # MaskToCorrect
+## Installation
+
+1. **Clone the repository**  
+   ```bash
+   git clone https://github.com/payelsantra/MaskToCorrect.git
+   cd MaskToCorrect
 
 ## Environment Setup (using Conda)
 
