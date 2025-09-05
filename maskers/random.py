@@ -28,7 +28,7 @@ class Masker:
                 masked_tokens[i] = "[MASK]"
             masked_claim = " ".join(masked_tokens)
     
-            data[idx]["masked_claim"] = masked_claim  # Use index as ID
+            data[idx]["masked_claim"] = [masked_claim]  # Use index as ID
         print(data[idx])
 
         return data
