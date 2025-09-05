@@ -1,11 +1,10 @@
 # MaskToCorrect
 ## Installation
 
-1. **Clone the repository**  
    ```bash
    git clone https://github.com/payelsantra/MaskToCorrect.git
    cd MaskToCorrect
-
+```
 ## Environment Setup (using Conda)
 
 We recommend creating a separate conda environment to avoid dependency conflicts.
@@ -27,3 +26,12 @@ conda activate scorer
 # Install the scorer dependencies
 pip install -r requirements_scorer.txt
 
+```
+## Running the Main Script
+
+After completing the installation steps and activating the environment, you can run the main functionality of MaskToCorrect with:
+
+```bash
+conda activate masktocorrect_env
+
+python main.py
