@@ -34,4 +34,10 @@ After completing the installation steps and activating the environment, you can 
 ```bash
 conda activate masktocorrect_env
 
-python main.py
+python main.py \
+  --input_file <path_to_input_file> \
+  --retriever <retriever_type> \
+  --shots <number_of_shots> \
+  --output_file <path_to_output_file> \
+  --model <model_name_or_path> \
+  --masker <masking_strategy>
