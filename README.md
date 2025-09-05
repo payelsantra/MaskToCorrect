@@ -41,3 +41,4 @@ python main.py \
   --output_file <path_to_output_file> \
   --model <model_name_or_path> \
   --masker <masking_strategy>
+  --dataset <dataset_name>
