@@ -33,26 +33,27 @@ def map_phrases_by_edge_tokens(sentence, phrases):
     return results
 class Masker:
     def mask(self, data, args):
-	for i in tqdm(range(len(data))):
-	    n_tokens=int(0.5*(len(data[i]["input_claim"].split(" "))))
-	    keywords = kw_model.extract_keywords(
-		data[i]["input_claim"],
-		keyphrase_ngram_range=(1, n_tokens),
-		stop_words=None,
-		use_mmr=True,
-		diversity=0.3,
-		top_n=10
-	    )    
-	    #print(keywords, n_tokens)
-	    keyphrases=[k[0] for k in keywords]
-	    #print(keyphrases)
+        for i in tqdm(range(len(data))):
+            n_tokens=int(0.5*(len(data[i]["input_claim"].split(" "))))
+            keywords = kw_model.extract_keywords(
+            data[i]["input_claim"],
+            keyphrase_ngram_range=(1, n_tokens),
+            stop_words=None,
+            use_mmr=True,
+            diversity=0.3,
+            top_n=10
+            )    
+            #print(keywords, n_tokens)
+            keyphrases=[k[0] for k in keywords]
+            #print(keyphrases)
 
-	    map_k=map_phrases_by_edge_tokens(data[i]["input_claim"], keyphrases)
-	    #i["masked_claim"] = i["input_claim"]
-	    #print(map_k)
-	    data[i]["masked_claim"]=[]
-	    for j in map_k:
-		if j is not None:
-		    data[i]["masked_claim"].append(data[i]["input_claim"].replace(j, "[MASK]"))
-	return data
+            map_k=map_phrases_by_edge_tokens(data[i]["input_claim"], keyphrases)
+            #i["masked_claim"] = i["input_claim"]
+            #print(map_k)
+            data[i]["masked_claim"]=[]
+            for j in map_k:
+                if j is not None:
+                    data[i]["masked_claim"].append(data[i]["input_claim"].replace(j, "[MASK]"))
+        return data
+
 

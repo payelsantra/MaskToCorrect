@@ -79,13 +79,8 @@ Claim: [sentence]"""
 
     return prompt_dict,o_id
 class Corrector:
-    def correct(self, data, args):
-        if args.model=="llama":
-            model_chosen="TheBloke/Llama-2-70b-Chat-AWQ"
-        elif args.model=="qwen":
-            model_chosen="Qwen/Qwen2.5-32B-Instruct-AWQ"
+    def correct(self, data, llm, args):
         
-        llm = LLM(model=model_chosen)
         prompt_dict,o_id=prompt_generator(data, args)
         prompt_list=list(prompt_dict.values())
 
@@ -121,5 +116,6 @@ class Corrector:
         return data
         
             
+
 
 
