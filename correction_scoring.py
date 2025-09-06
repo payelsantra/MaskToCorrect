@@ -7,7 +7,7 @@ import numpy as np
 import rouge
 from tqdm import tqdm
 from typing import List, Dict
-import nltk
+import nltk,pickle
 nltk.download('punkt')
 nltk.download('punkt_tab')
 
@@ -188,6 +188,7 @@ correction = Correction(model_args)
 outputs = correction.batch_correct(samples)
 for i in range(len(sentences)):
     sentences[str(list_dict_map[i])]=outputs[i]
-cs_output=args.output.split(".pkl")[0]+"_cs.pkl"
+cs_output=args.output_file.split(".pkl")[0]+"_cs.pkl"
 with open(cs_output,'wb') as eo:
     pickle.dump(sentences, eo)
+
