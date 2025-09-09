@@ -1,3 +1,5 @@
 torch==2.2.1
 vllm==0.4.1
 keybert
+spacy
+stanza
