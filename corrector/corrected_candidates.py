@@ -54,15 +54,16 @@ Claim: [sentence]"""
     """
     j=0
     use_zeroshot=0
-    for key in data:
+    prompt_dict={}
+    o_id={}
+    for key in data.keys():
         try:
             e=data[key]['evidence'][0:args.shots]
         except:
             e=data[key]['evidence']
             use_zeroshot=1
         claim=data[key]['input_claim']
-        prompt_dict={}
-        o_id={}
+        
         for masked_claim in data[key]["masked_claim"]:
             #print(i) 
             if use_zeroshot==0:
@@ -72,18 +73,19 @@ Claim: [sentence]"""
                     prompt_answer=prompt_answer+"""\nEvidence"""+str(e_id)+e[e_id-1]
                 prompt_answer=prompt_answer+"""\nMasked Claim: """+masked_claim
             else:
-                prompt_answer=instruction_zero+"""\nInput:\nClaim: """+claim+"""\nMasked Claim: """+i 
+                
+                prompt_answer=instruction_zero+"""\nInput:\nClaim: """+claim+"""\nMasked Claim: """+masked_claim
             prompt_dict[j]=prompt_answer+"\n\nOutput:"
             o_id[j]=key
             j=j+1
-
+            #print(key)
+    #print(len(prompt_dict))
     return prompt_dict,o_id
 class Corrector:
     def correct(self, data, llm, args):
         
         prompt_dict,o_id=prompt_generator(data, args)
         prompt_list=list(prompt_dict.values())
-
         if args.model=="llama": 
             sampling_params = SamplingParams(temperature=0.05, top_p=0.5, min_tokens=10, max_tokens=100, stop=["}"], include_stop_str_in_output=True)
         elif args.model=="qwen":
