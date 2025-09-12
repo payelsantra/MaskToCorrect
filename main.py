@@ -1,7 +1,7 @@
 import argparse
 import sys
 import importlib
-import json, pickle
+import json, pickle, torch 
 import subprocess
 from collections import Counter
 from vllm import LLM, SamplingParams
@@ -101,6 +101,12 @@ if __name__ == "__main__":
             output_ret="ensemble_"+ef
             with open(output_ret,"wb") as ret_file:
                 pickle.dump(corrected_candidates,ret_file)
+        del llm
+        import gc
+        gc.collect()
+        torch.cuda.empty_cache()
+
+
         for ef in evidence_file:
             output_ret="ensemble_"+ef
             run_in_other_env(output_ret)
@@ -136,10 +142,13 @@ if __name__ == "__main__":
     	corrector_module=importlib.import_module("corrector.corrected_candidates")
     	corrector=corrector_module.Corrector()
     	corrected_candidates=corrector.correct(masked_output, llm, args)
+    	del llm
+    	import gc
+    	gc.collect()
+    	torch.cuda.empty_cache()
     	with open(args.output_file,"wb") as ret_file:
     	    	pickle.dump(corrected_candidates,ret_file)
     	run_in_other_env(args.output_file)
-    print("Masking completed.")
  
 
 
